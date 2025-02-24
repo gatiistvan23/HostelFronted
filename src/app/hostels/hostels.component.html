@@ -1,0 +1,8 @@
+<button (click)="router.navigate(['/newBooking'])" type="button" class="my-3 btn btn-primary"></button>
+
+<div *ngFor="let hostel of hostels" class="row">
+    <div class="col">
+        <p (click)="hostel.visible = !hostel.visible">{{hostel.name}}</p>
+        <app-booking ngIf="hostel.visible" [bookings]="hostel.bookings"></app-booking>
+    </div>
+</div>

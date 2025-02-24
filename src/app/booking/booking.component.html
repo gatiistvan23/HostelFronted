@@ -1,0 +1,13 @@
+<!-- <p>booking works!</p> -->
+<!-- {{bookings|json}} -->
+
+<ng-container *ngIf="bookings.length>0; else empty">
+<div *ngFor="let booking of bookings" class="row">
+    <div class="col">{{booking.checkIn.slice(0,10)}}</div>
+    <div class="col">{{booking.checkOut.slice(0,10)}}</div>
+    <div class="col">{{booking.guests}} fő</div>
+</div>
+</ng-container>
+<ng-template #empty>
+    <p class="ms-3">Nincs foglalás</p>
+</ng-template>

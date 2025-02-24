@@ -1,0 +1,25 @@
+<!-- {{hostels|json}} -->
+<select [(ngModel)]="bnookingHostels" class="form-select mt-3" aria-label="Hostels">    
+    <option value="0">Hostels</option> 
+    <option *ngFor="let hostel of hostels" [value]="hostel.id">{{hostel.name}}</option>    
+  </select>
+
+<div class="form-floating mb-3">
+    <input [(ngModel)]="guest" min="1" type="number" class="form-control" id="floatingInput" >
+    <label for="floatingInput">Guest</label>
+</div>
+
+<div class="form-floating mb-3">
+<ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2"  outsideDays="hidden"></ngb-datepicker>
+
+<ng-template #t let-date let-focused="focused">
+
+</ng-template>
+</div>
+<div *ngIf="error" class="alert alert-danger" role="alert">
+    {{errorMassage}}
+</div>
+
+<button (click)="newBooking()" type="button" class="btn btn-primary"></button>
+
+<hr/>
