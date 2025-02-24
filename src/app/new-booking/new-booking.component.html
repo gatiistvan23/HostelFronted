@@ -1,25 +1,36 @@
 <!-- {{hostels|json}} -->
-<select [(ngModel)]="bnookingHostels" class="form-select mt-3" aria-label="Hostels">    
-    <option value="0">Hostels</option> 
-    <option *ngFor="let hostel of hostels" [value]="hostel.id">{{hostel.name}}</option>    
-  </select>
+<select [(ngModel)]="bookingHostel" class="form-select mt-3" aria-label="Hostels">
+    <option value="0">Hostels</option>
+    <option *ngFor="let hostel of hostels" [value]="hostel.id">{{hostel.name}}</option>
+</select>
 
-<div class="form-floating mb-3">
-    <input [(ngModel)]="guest" min="1" type="number" class="form-control" id="floatingInput" >
+<div class="form-floating my-3">
+    <input [(ngModel)]="guest" min="1" type="number" class="form-control" id="floatingInput">
     <label for="floatingInput">Guest</label>
-</div>
+  </div>
 
-<div class="form-floating mb-3">
-<ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2"  outsideDays="hidden"></ngb-datepicker>
+<div class="form-floating my-3">
+<ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" />
 
 <ng-template #t let-date let-focused="focused">
-
+	<span
+		class="custom-day"
+		[class.focused]="focused"
+		[class.range]="isRange(date)"
+		[class.faded]="isHovered(date) || isInside(date)"
+		(mouseenter)="hoveredDate = date"
+		(mouseleave)="hoveredDate = null"
+	>
+		{{ date.day }}
+	</span>
 </ng-template>
 </div>
 <div *ngIf="error" class="alert alert-danger" role="alert">
-    {{errorMassage}}
+    {{errorMessage}}
 </div>
+<button (click)="newBooking()" type="button" class="btn btn-primary">Booking</button>
 
-<button (click)="newBooking()" type="button" class="btn btn-primary"></button>
+<!-- <hr />
 
-<hr/>
+<pre>From: {{ fromDate | json }} </pre>
+<pre>To: {{ toDate | json }} </pre> -->
